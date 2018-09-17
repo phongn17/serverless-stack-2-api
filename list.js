@@ -1,9 +1,11 @@
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
+const TABLE_NAME = process.env.tableName;
+
 export async function main(event, context, callback) {
   const params = {
-    TableName: "notes",
+    TableName: TABLE_NAME,
     // 'KeyConditionExpression' defines the condition for the query
     // - 'userId = :userId': only return items with matching 'userId'
     //   partition key
