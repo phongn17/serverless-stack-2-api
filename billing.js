@@ -11,7 +11,7 @@ export async function main(event, context, callback) {
   const stripe = stripePackage(process.env.stripeSecretKey);
 
   try {
-    await stripe.charges.create({ source, amount, desc, currency: 'usd' });
+    await stripe.charges.create({ source, amount, description: desc, currency: 'usd' });
     callback(null, success({ status: true }));
   } catch (ex) {
     callback(null, failure({ message: ex.message }));
