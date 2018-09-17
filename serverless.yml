@@ -19,6 +19,8 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  # Load our secret env vars based on the current stage
+  enviroment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
 
 provider:
   name: aws
@@ -30,6 +32,7 @@ provider:
   environment:
     tableName:
       Ref: NotesTable
+    stripeSecretKey: ${self:custom.enviroment.stripeSecretKey}
 
   # 'iamRoleStatement' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
